@@ -1,0 +1,123 @@
+body, html {
+  margin: 0;
+  padding:0;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* ---------------- HEADER ---------------- */
+.win-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 1.3rem;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  -webkit-app-region: drag;
+  background: transparent;
+}
+
+.window-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.win-btn {
+  border: none;
+  font-size: 1.3rem;
+  font-weight: lighter;
+  cursor: pointer;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: transparent;
+  color: inherit;
+  transition: transform 0.2s ease, background 0.2s ease;
+  -webkit-app-region: no-drag;
+}
+.win-btn:hover {
+  transform: translateY(-1px) scale(1.05);
+  color: #ffffff;
+}
+
+.theme-light .win-btn:hover {
+  color: #000000;
+}
+
+/* --- */
+
+.chat-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 15px;
+  min-height: 9rem;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: hidden;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: flex-start; /* Ensure content starts from the top */
+}
+
+.msg.bot {
+  align-self: flex-start;
+  max-width:95%;
+  color: var(--text-color);
+  font-size: 15px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.animate-typing {
+  display: inline-block;
+  font-style: italic;
+  color: #888;
+
+  background: linear-gradient(
+    90deg,
+    rgba(136, 136, 136, 0.3) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(136, 136, 136, 0.3) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: typingFade 1.2s linear infinite;
+}
+
+@keyframes typingFade {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ---------------- TEMI ---------------- */
+.theme-light {
+  background: #f5f5f5f1;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #252525;
+}
+
+.theme-dark {
+  background: #1e1e1ec2;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ddd;
+}
+
+.theme-transparent {
+  background-color: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.18), inset 0 0 0.5px rgba(255,255,255,0.12);
+  color: #f2f2f2;
+}

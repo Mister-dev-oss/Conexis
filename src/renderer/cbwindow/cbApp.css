@@ -1,0 +1,696 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  overflow: hidden;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.theme-light {
+  --bg-color: #f5f5f5f1;
+  --border-color: rgba(255, 255, 255, 0.2);
+  --text-color: #252525;
+  --input-bg: #ffffff;
+  --badge-bg: #252525;
+  --badge-color: #ffffff;
+  --user-msg-bg: rgba(37, 37, 37, 0.85);
+}
+
+.theme-dark {
+  --bg-color: #1e1e1ec2;
+  --border-color: rgba(255, 255, 255, 0.2);
+  --text-color: #ddd;
+  --input-bg: rgba(255,255,255,0.05);
+  --badge-bg: #ddd;
+  --badge-color: #1e1e1e;
+  --user-msg-bg: rgba(221, 221, 221, 0.85);
+}
+
+.theme-transparent {
+  --bg-color: rgba(255, 255, 255, 0.28);
+  --border-color: rgba(255, 255, 255, 0.18);
+  --text-color: #f2f2f2;
+  --input-bg: rgba(255,255,255,0.1);
+  --badge-bg: #f2f2f2;
+  --badge-color: #1e1e1e;
+  --user-msg-bg: rgba(242, 242, 242, 0.85);
+}
+
+/* ---------------- HEADER ---------------- */
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 28px;
+  padding: 0 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  -webkit-app-region: drag;
+  background: transparent;
+}
+
+.window-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.win-btn {
+  border: none;
+  font-size: 21px;
+  font-weight: lighter;
+  cursor: pointer;
+  border-radius: 6px;
+  width: 22px;
+  height: 22px;
+  background: transparent;
+  color: inherit;
+  transition: transform 0.2s ease, background 0.2s ease;
+  -webkit-app-region: no-drag;
+}
+
+.win-btn:hover {
+  transform: translateY(-1px) scale(1.05);
+  color: #ffffff;
+}
+
+
+
+/* BASE FLOATING BAR */
+.floating-bar {
+  width: 400px;
+  min-height: 80px; /* altezza minima */
+  max-height: 450px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+
+.input-buttons button,
+.send-badge,
+.input-container input {
+  -webkit-app-region: no-drag; 
+}
+
+.floating-bar.collapsed { height: auto; overflow: visible; }
+.floating-bar.expanded { height: 450px; }
+
+.chat-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  scrollbar-arrow-color: transparent;
+  scrollbar-width: none;
+}
+
+.collapsed-top-bar {
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-color);
+  background: rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  -webkit-app-region: drag;
+}
+
+
+.msg.user {
+  align-self: flex-end;
+  max-width: 75%;
+  background: var(--user-msg-bg); 
+  color: var(--badge-color);     
+  padding: 6px 10px;
+  border-radius: 12px 12px 0 12px;
+  font-size: 14px;
+  white-space: pre-wrap; 
+  word-break: break-word;
+}
+
+
+.msg.bot {
+  align-self: flex-start;
+  max-width: 75%;
+  color: var(--text-color);
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.msg.bot p {
+  margin: 0.25em 0;
+}
+
+.msg.bot ul {
+  padding-left: 1.2em;
+  margin: 0.25em 0;
+}
+
+.msg.bot li {
+  margin: 0.25em 0;
+}
+
+.msg.bot strong {
+  font-weight: bold;
+}
+
+.msg.bot em {
+  font-style: italic;
+}
+
+/* Fix for chat-input border in light theme */
+.chat-input {
+  padding: 8px 12px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  -webkit-app-region: drag;
+  flex-shrink: 0;
+  position: relative; /* Ensure proper positioning */
+  z-index: 1; /* Ensure it's above other elements */
+}
+
+.theme-light .chat-input {
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.theme-transparent .chat-input {
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Fix for chat-messages scrollbar */
+.chat-messages {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.chat-messages::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  background: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 8px 12px;
+  position: relative;
+  transition: all 0.3s ease;
+  -webkit-app-region: no-drag;
+  min-height: 40px; /* Ensure minimum height in collapsed mode */
+  overflow: visible; /* Ensure content doesn't get cut off */
+  z-index: 10; /* Ensure it appears above other elements when in collapsed mode */
+}
+
+/* Drag and drop styling */
+.input-container.dragging {
+  border: 1px solid var(--badge-bg);
+  background-color: rgba(0, 0, 0, 0.3); /* Increased opacity for less transparency */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  position: relative;
+  cursor: copy; /* Show copy cursor when dragging */
+}
+
+.input-container.dragging::before {
+  content: '+';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+  color: var(--badge-bg);
+  opacity: 0.8; /* Increased opacity for better visibility */
+  z-index: 10; /* Increased z-index to ensure it's above all content */
+  pointer-events: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  line-height: 1;
+}
+
+.input-container.dragging .textarea-wrapper,
+.input-container.dragging .action-buttons {
+  opacity: 0.3;
+  /* We don't disable pointer-events here to allow interaction */
+}
+
+/* Create an overlay when dragging to capture events while still allowing interaction */
+.input-container.dragging::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5; /* Below the + sign but above content */
+  pointer-events: none; /* Allow events to pass through to elements below */
+}
+
+.input-container:focus-within {
+  border: 1px solid #ffffff; /* bianco */
+  box-shadow:
+    0 0 5px rgba(255, 255, 255, 0.3),
+    0 0 10px rgba(255, 255, 255, 0.2),
+    0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.input-container.theme-light:focus-within {
+  border: 1px solid #000000; /* nero */
+  box-shadow:
+    0 0 5px rgba(0, 0, 0, 0.3),
+    0 0 10px rgba(0, 0, 0, 0.2),
+    0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.textarea-wrapper {
+  width: 100%;
+  position: relative;
+  padding-right: 100px; /* Reserve space for buttons in single-line mode */
+  overflow: hidden; /* Prevent text from overflowing */
+  pointer-events: auto; /* Changed to auto to allow interaction with textarea */
+}
+
+.auto-resize-textarea {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  outline: none;
+  font-size: 14px;
+  resize: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  max-height: 72px; /* 3 lines max visible */
+  line-height: 1.5;
+  font-family: inherit;
+  transition: height 0.2s ease;
+  pointer-events: auto; /* Changed to auto to allow text input */
+
+  scrollbar-arrow-color: transparent;
+  scrollbar-width: none;
+}
+
+/* Ensure textarea remains interactive even when dragging */
+.input-container.dragging .auto-resize-textarea {
+  position: relative;
+  z-index: 6; /* Ensure it's above the overlay */
+}
+
+/* Action buttons container */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  transition: all 0.3s ease;
+  -webkit-app-region: no-drag;
+  width: 100%;
+  position: relative;
+  z-index: 6; /* Ensure buttons are above the overlay */
+}
+
+.left-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* Attachment button with counter */
+.attachment-button-container {
+  position: relative;
+  display: inline-flex;
+}
+
+.file-counter {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--badge-bg);
+  color: var(--badge-color);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* File List Dropdown */
+.file-list-dropdown {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-100%);
+  width: 250px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  overflow: hidden;
+  -webkit-app-region: no-drag;
+  transition: all 0.3s ease;
+}
+
+.file-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.theme-light .file-list-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.file-list-close {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.file-list-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.file-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 150px;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.file-items::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.2s ease;
+}
+
+.theme-light .file-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.file-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.file-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.no-files {
+  padding: 12px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.theme-light .no-files {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.file-list-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.theme-light .file-list-actions {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.file-action-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-color);
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.file-action-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-file {
+  background: rgba(0, 120, 212, 0.2);
+}
+
+.theme-light .add-file {
+  background: rgba(0, 120, 212, 0.1);
+}
+
+.clear-files {
+  background: rgba(232, 17, 35, 0.2);
+}
+
+.theme-light .clear-files {
+  background: rgba(232, 17, 35, 0.1);
+}
+
+/* Single line mode - buttons on the right */
+.action-buttons.single-line {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2; /* Ensure buttons are above text */
+  width: auto;
+}
+
+/* Multi line mode - buttons below */
+.action-buttons.multi-line {
+  margin-top: 8px;
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Individual action buttons */
+.action-button {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-app-region: no-drag;
+}
+
+.action-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Send button */
+.send-button {
+  background: var(--badge-bg);
+  color: var(--badge-color);
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  -webkit-app-region: no-drag;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.send-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Typing Animation */
+
+.animate-typing {
+  display: inline-block;
+  font-style: italic;
+  color: #888; /* colore base */
+
+  /* Gradient che scorre */
+  background: linear-gradient(
+    90deg,
+    rgb(43, 42, 42) 0%,
+    rgb(255, 255, 255) 50%,
+    rgb(43, 42, 42) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: typingFade 1.2s linear infinite;
+}
+
+
+
+@keyframes typingFade {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+
+/* Add red pulsing animation for invalid files */
+@keyframes pulseRed {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+    color: var(--text-color);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(255, 0, 0, 0);
+    color: #ff3333;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    color: var(--text-color);
+  }
+}
+
+.pulse-red {
+  animation: pulseRed 1.5s infinite;
+}
+
+/* Invalid file indicator */
+.invalid-file-indicator {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff3333;
+  color: white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+/* File section headers */
+.file-section {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-light .file-section {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.file-section-header {
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-color);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.theme-light .file-section-header {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.file-section-header.invalid {
+  color: #ff3333;
+  background: rgba(255, 51, 51, 0.1);
+}
+
+/* Invalid file item styling */
+.invalid-file {
+  background: rgba(255, 51, 51, 0.05);
+}
+
+.invalid-file-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.invalid-reason {
+  font-size: 10px;
+  color: #ff3333;
+  margin-top: 2px;
+}
+
