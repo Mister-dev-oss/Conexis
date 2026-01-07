@@ -1,6 +1,6 @@
-# Desktop AI Assistant
+# Conexis AI Assistant
 
-**Desktop AI Assistant** is a powerful desktop application built with **Electron**, designed to provide an AI chat experience directly on your desktop. It combines chat functionality, document parsing, and real-time audio transcription, with local RAG (Retrieval-Augmented Generation) capabilities for enhanced context awareness.
+**Conexis AI Assistant** is a powerful desktop application built with **Electron**, designed to provide an AI chat experience directly on your desktop. It combines chat functionality, document parsing, and real-time audio transcription, with local RAG (Retrieval-Augmented Generation) capabilities for enhanced context awareness.
 
 > ⚠️ Note: This project is in **local testing phase**. Some references are still pointing to `localhost`, and there may be minor bugs. Only the renderer and backend parts are included—no final build or boilerplate.
 > ⚠️ Note: Some parts of the codebase and comments are written in both Italian and English.  
