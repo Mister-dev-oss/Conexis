@@ -21,7 +21,8 @@
 - **Electron** – Frontend and desktop application framework.  
 - **Go HTTP Server** – Local server for AI chat requests.  
 - **C++** – For local Whisper transcription, embedding, and RAG DB.  
-- **ONNX Runtime** – Run embedding models locally.  
+- **ONNX Runtime** – Run embedding models locally.
+- **Whisper** - For local live transriptions.
 - **FAISS** – Fast vector search for retrieval tasks.  
 
 ## Project Status
