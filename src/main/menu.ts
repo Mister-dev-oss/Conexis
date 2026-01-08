@@ -1,3 +1,5 @@
+// default electron app menu for all OS, this function HAS NOT been implemented inside the DEMO, or in the rest of the code on the repository
+
 import {
   app,
   Menu,
