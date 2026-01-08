@@ -35,6 +35,6 @@
 
 This project is designed to showcase the architecture and functionality of a desktop AI assistant. It is **not production-ready**, but demonstrates a combination of AI chat, local processing, and RAG capabilities.
 
-[Watch Conexis Demo](https://streamable.com/9u8g1j)
+[Watch Conexis Demo]([https://www.youtube.com/watch?v=_64bPUnEpYY])
 
 
