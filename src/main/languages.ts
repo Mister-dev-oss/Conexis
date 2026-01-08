@@ -1,3 +1,4 @@
+// This Function HAS NOT been implemented in the video, or in the rest of the code in the repository
 
 export const allowedLanguages: string[] = [
   "English",
@@ -54,4 +55,5 @@ export function isValidLanguage(language: string): boolean {
 // Controlla se il codice audioContextLanguage è valido
 export function isValidAudioContextLanguage(code: string): boolean {
   return allowedAudioContextLanguages.includes(code);
+
 }
